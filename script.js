@@ -16,6 +16,7 @@ let checkBtn = document.querySelector(".check");
 checkBtn.addEventListener("click", () => {
     let guess = Number(document.querySelector(".guess").value);
 
+
     if(!guess) {
         // If there is no number
         document.querySelector(".message").textContent = "🚫 No number!";
@@ -33,26 +34,15 @@ checkBtn.addEventListener("click", () => {
     } else if(guess < 0 || guess > 20){
         document.querySelector(".message").textContent = "The number has to be higher than 0 and lower than 20.";
         //If the number is incorrect but valid and higher
-    } else if(guess > number){
+    }  else if(guess !== number) {
         if(score > 1) {
-            document.querySelector(".message").textContent = "👆 Too high!";
+            document.querySelector(".message").textContent = guess > number ? "👆 Too high!" : "👇 Too low!";
             score--;
             document.querySelector(".score").textContent = score;
         } else {
-            document.querySelector(".message").textContent = "You lost the game!";
+            document.querySelector(".message").textContent = "💥 You lost the game!";
             document.querySelector(".score").textContent = 0;
-        }
-        // If the number is incorrect but valid and lower
-    } else if(guess < number){
-        if(score > 1) {
-            document.querySelector(".message").textContent = " 👇 Too low!";
-            score--;
-            document.querySelector(".score").textContent = score;
-        } else {
-            document.querySelector(".message").textContent = "You lost the game!";
-            document.querySelector(".score").textContent = 0;
-        }
-    }
+        }}
 });
 
 let againBtn = document.querySelector(".again");
