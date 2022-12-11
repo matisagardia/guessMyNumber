@@ -3,11 +3,16 @@
 // Generate a random number
 let number = Math.trunc(Math.random() * 20) + 1;
 
+// Functions for message text change
 
+function messageContent(msg){
+    return document.querySelector(".message").textContent = msg;
+}
 
 // Generate the score value to interact based on the correct choices
 let score = 20;
 let highScore = 0;
+
 
 // Event listener for the check button, which triggers all the game
 
@@ -19,10 +24,10 @@ checkBtn.addEventListener("click", () => {
 
     if(!guess) {
         // If there is no number
-        document.querySelector(".message").textContent = "🚫 No number!";
+        messageContent("🚫 No number!");
         // If the number is correct
     } else if(guess === number){
-        document.querySelector(".message").textContent = "👍 Correct number!";
+        messageContent("👍 Correct number!");
         document.querySelector("body").style.backgroundColor = "#60b347";
         document.querySelector(".number").style.width = "30rem";
         document.querySelector(".number").textContent = number;
@@ -32,15 +37,15 @@ checkBtn.addEventListener("click", () => {
         }
         // If the number is not valid
     } else if(guess < 0 || guess > 20){
-        document.querySelector(".message").textContent = "The number has to be higher than 0 and lower than 20.";
+        messageContent("The number has to be higher than 0 and lower than 20.");
         //If the number is incorrect but valid and higher
     }  else if(guess !== number) {
         if(score > 1) {
-            document.querySelector(".message").textContent = guess > number ? "👆 Too high!" : "👇 Too low!";
+            messageContent(guess > number ? "👆 Too high!" : "👇 Too low!");
             score--;
             document.querySelector(".score").textContent = score;
         } else {
-            document.querySelector(".message").textContent = "💥 You lost the game!";
+            messageContent("💥 You lost the game!");
             document.querySelector(".score").textContent = 0;
         }}
 });
@@ -51,7 +56,7 @@ againBtn.addEventListener("click", () => {
     score = 20;
     document.querySelector(".score").textContent = score;
     number = Math.trunc(Math.random() * 20) + 1;
-    document.querySelector(".message").textContent = "Start guessing...";
+    messageContent("Start guessing...");
     document.querySelector(".guess").value = '';
     document.querySelector(".number").textContent = "?";
     document.querySelector(".number").style.width = "15rem";
